@@ -61,10 +61,12 @@ grid_size_factor = 2;  // changes the size of the inner grid blocks
 
 grid_mode = 2; // Grid mode 1=diamond 2= spar and cross spars
 
+//****************Grid mode 2 settings**********//
 spar_num = 3;     // Number of spars for grid mode 2
 spar_offset = 15; // Offset the spars from the LE/TE
 rib_num = 6;      // Number of ribs
 rib_offset = 1;   // Offset
+//******//
 
 create_rib_voids = true; // add holes to the ribs to decrease weight
 
@@ -72,9 +74,8 @@ spar_hole = true;                // Add a spar hole into the wing
 spar_hole_perc = 35;             // Percentage from leading edge
 spar_hole_size = 6;              // Size of the spar hole
 spar_hole_length = 200;          // lenth of the spar in mm
-spar_hole_offset = 7;            // Adjust where the spar is located
-spar_hole_void_clearance = 0.86; // Clearance for the spar to grid interface(double extrusion width is usually needed)
-spar_hole_void_bot = 3; // offset of the bottom of the spar void(this should cut through the center void or the whole the wing)
+spar_hole_offset = 6;            // Adjust where the spar is located
+spar_hole_void_clearance = 0.88; // Clearance for the spar to grid interface(double extrusion width is usually needed)
 
 //*******************END***************************//
 
@@ -107,18 +108,27 @@ module main()
                             {
                                 if (grid_mode == 1)
                                 {
-                                    CreateRibVoids();
+                                    if(create_rib_voids){
+                                    CreateRibVoids();}
                                 }
                                 else
                                 {
+                                    if(create_rib_voids){
                                     CreateRibVoids2();
+                                    }
                                 }
-                                CreateSparVoid();
+                                if (spar_hole)
+                                {
+                                    CreateSparVoid();
+                                }
                             }
                         }
                         CreateGridVoid();
                     }
-                    CreateSparHole();
+                    if (spar_hole)
+                    {
+                        CreateSparHole();
+                    }
                 }
             }
         }
