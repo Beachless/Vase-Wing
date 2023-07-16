@@ -25,6 +25,10 @@ I then used the perl script from https://github.com/guillaumef/openscad-airfoil 
 The wing construction technique was copied from the Propellor Generator by BouncyMonkey found here: https://www.thingiverse.com/thing:3506692
 
 
+![Wing1](git-images/wing1.png)
+![Wing2](git-images/wing2.png)
+![Wing3](git-images/wing3.png)
+
 ## Installation
 
 If all you want to do is create wings from the provided airfoils then you only need to install OpenSCAD.
