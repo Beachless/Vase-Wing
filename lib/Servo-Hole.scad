@@ -17,6 +17,15 @@ module 3_7gServo()
         translate([ 10, 0, 15 ]) cube([ 1, 13, 10 ]);
         }
     }
+    difference() {
+    union() {
+    color("gray") translate([ 0, 0, -10 ]) cube([ 0.1, 14, 10 ]);
+    color("gray") translate([ 10.45, 0, -10 ]) cube([ 0.1, 14, 10 ]);
+    color("gray") translate([ 20.9, 0, -10 ]) cube([ 0.1, 14, 10 ]);
+    }
+    rotate([-35,0,0]) 
+    color("blue") translate([ -1, 0, -10 ]) cube([ 24, 50, 10 ]);
+    }
 }
 module 3_7gServoVoid()
 {
