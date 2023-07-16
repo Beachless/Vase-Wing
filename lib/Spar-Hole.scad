@@ -1,3 +1,5 @@
+extra_spar_hole_bot_offset=0.2;
+
 module CreateSparHole()
 {
     translate([ 0, spar_hole_offset, 0 ]) union()
@@ -17,7 +19,7 @@ module CreateSparHole()
 module CreateSparVoid()
 {
 
-    translate([ 0, spar_hole_offset-0.2, 0 ]) 
+    translate([ 0, spar_hole_offset-extra_spar_hole_bot_offset, 0 ]) 
     union()
     {
         color("blue") 
