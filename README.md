@@ -27,7 +27,6 @@ The wing construction technique was copied from the Propellor Generator by Bounc
 
 ![Wing1](git-images/wing1.png)
 ![Wing2](git-images/wing2.png)
-![Wing3](git-images/wing3.png)
 
 ## Installation
 
