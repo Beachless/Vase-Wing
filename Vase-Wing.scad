@@ -87,11 +87,11 @@ spar_hole_void_clearance = 0.88; // Clearance for the spar to grid interface(dou
 //******//
 
 //****************Servo settings**********//
-create_servo_void = true;
-servo_type = 1;          // 1=3.7g 2=5g 3=9g
+create_servo_void = true; //It is important to check that your servo placement doesnt create any artifacts(You can comment out the CreateWing() function to assist)
+servo_type = 1;           // 1=3.7g 2=5g 3=9g
 servo_dist_root_mm = 100; // servo placement from root
-servo_dist_le_mm = 62;   // servo placement from the leading edge
-servo_rotate_z_deg = -7; // degrees to rotate on z axis
+servo_dist_le_mm = 64;    // servo placement from the leading edge
+servo_rotate_z_deg = -7;  // degrees to rotate on z axis
 servo_dist_depth_mm = 10; // offset the servo into or out of the wing till you dont see red
 servo_show = false;       // for debugging only. Show the servo for easier placement
 //******//
@@ -147,8 +147,7 @@ module main()
                                     }
                                     if (create_servo_void)
                                     {
-                                        rotate([0,0,servo_rotate_z_deg]) 
-                                        translate([
+                                        rotate([ 0, 0, servo_rotate_z_deg ]) translate([
                                             servo_dist_le_mm, servo_dist_depth_mm,
                                             servo_dist_root_mm
                                         ]) 3_7gServoVoid();
@@ -158,19 +157,19 @@ module main()
                         }
                         CreateGridVoid();
                     }
-                    union()
-                    {
-                        if (spar_hole)
-                        {
-                            CreateSparHole();
-                        }
-                        if (create_servo_void)
-                        {
-                            rotate([0,0,servo_rotate_z_deg])
-                            translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ]) 3_7gServo();
-                        }
-                    }
                 }
+            }
+        }
+        union()
+        {
+            if (spar_hole)
+            {
+                CreateSparHole();
+            }
+            if (create_servo_void)
+            {
+                rotate([ 0, 0, servo_rotate_z_deg ])
+                    translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ]) 3_7gServo();
             }
         }
     }
@@ -190,12 +189,11 @@ else if (add_inner_grid == false && spar_hole == true)
 }
 else
 {
-    main();
-
+     main();
 
     if (servo_show)
     {
-        rotate([0,0,servo_rotate_z_deg])
-        translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ]) 3_7gServo();
+        rotate([ 0, 0, servo_rotate_z_deg ])
+            translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ]) 3_7gServo();
     }
 }
