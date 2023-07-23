@@ -36,6 +36,18 @@ Refer to https://github.com/guillaumef/openscad-airfoil for instructions on usin
 
 ## Usage
 
+-----------------------------------------------------------
+This is a fairly complicated render so takes time in the normal OpenSCAD application. At this time there is a new geometry engine called Manifold that is being implemented that is easily 100x faster than the old CSG one but it is only available in the Developer builds at the moment. To use it do the following:
+
+Install the newest Development Snapshot of OpenSCAD from here:
+https://openscad.org/downloads.html#snapshots
+
+Then go to Edit/Preferences in the menu
+Click on Features icon
+Select manifold checkbox 
+
+-----------------------------------------------------------
+
 To use the Vase-Wing.scad script, simply open it in OpenSCAD. You can customize various configurations.
 
 First, update the "// Module for root airfoil polygon section" and add a reference for any airfoils found in the lib/openscad-airfoil folder that you want to use.
