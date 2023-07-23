@@ -58,23 +58,22 @@ module StructureGridHoles(wing_mm, root_chord, size_factor)
             cube([ root_chord, grid_height, rib_grid_distance + rib_width / 2 ]);
 }
 
+
 module StructureSparGrid(wing_mm, root_chord, size_factor, spar_num, spar_offset, rib_num, rib_offset)
 {
 
-    space_bet_spars = (root_chord - (spar_offset * 2)) / spar_num - 1;
+    space_bet_spars = (root_chord - (spar_offset * 2)) / (spar_num - 1);
     space_bet_ribs = (wing_mm - (rib_offset * 2)) / (rib_num - 1);
 
     difference()
     {
         union()
         {
-            translate([ spar_offset, 0, 0 ]) for (i = [0:spar_num - 1])
+            translate([ spar_offset, 0, 0 ]) 
+            for (i = [0:spar_num - 1])
             {
-                difference()
-                {
                     translate([ space_bet_spars * i, -root_chord / 3 / 2, 0 ]) color("orange")
                         cube([ rib_width, root_chord / 3, wing_mm ]);
-                }
             }
             for (i = [0:rib_num])
             {

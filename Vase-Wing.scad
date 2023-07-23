@@ -42,7 +42,7 @@ module TipAirfoilPolygon()
 wing_mode = 2; // 1=trapezoidal wing 2= elliptic wing
 
 wing_sections =
-    29; // how many sections you would like to break up the wing into more is higher resolution but higher processing
+    19; // how many sections you would like to break up the wing into more is higher resolution but higher processing
 wing_mm = 300;            // wing length in mm
 wing_root_chord_mm = 150; // Root chord legth in mm
 wing_tip_chord_mm = 50;   // wing tip chord length in mm (Not relevant for elliptic wing)
@@ -191,6 +191,7 @@ else if (add_inner_grid == false && spar_hole == true)
 else
 {
     main();
+
 
     if (servo_show)
     {
