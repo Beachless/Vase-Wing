@@ -12,7 +12,7 @@ module CreateSparHole()
         }
 
         color("red") translate([ spar_hole_perc / 100 * wing_root_chord_mm, 0, 0 ])
-            cylinder(h = spar_hole_length, r = spar_hole_size / 2, $fn = 36);
+            cylinder(h = spar_hole_length, r = spar_hole_size / 2);
     }
 }
 
@@ -24,7 +24,7 @@ module CreateSparVoid()
     {
         color("blue") 
         translate([ spar_hole_perc / 100 * wing_root_chord_mm, 0, 0 ])
-            cylinder(h = spar_hole_length, r = spar_hole_size / 2 + (spar_hole_void_clearance / 2), $fn = 36);
+            cylinder(h = spar_hole_length, r = spar_hole_size / 2 + (spar_hole_void_clearance / 2));
         color("brown") 
         translate([ spar_hole_perc / 100 * wing_root_chord_mm - ((spar_hole_size + spar_hole_void_clearance)/2), 0, 0 ])
         cube([ spar_hole_size + spar_hole_void_clearance, 100, spar_hole_length ]);

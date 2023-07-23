@@ -39,6 +39,9 @@ module TipAirfoilPolygon()
 
 //****************Global Variables*****************//
 
+$fa=10; //360deg/5($fa) = 60 facets this affects performance and object shoothness
+$fs=1; //Min facet size
+
 wing_mode = 2; // 1=trapezoidal wing 2= elliptic wing
 
 wing_sections =
