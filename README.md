@@ -23,8 +23,19 @@ Additionally, I utilized the Perl script from https://github.com/guillaumef/open
 
 The wing construction technique was adapted from the Propeller Generator by BouncyMonkey, available here: https://www.thingiverse.com/thing:3506692
 
-![Wing1](git-images/wing1.png)
-![Wing2](git-images/wing2.png)
+![Wing1](git-images/E-Wing-1.png)
+
+
+![Wing2](git-images/E-Wing-2.png)
+
+
+![Wing3](git-images/E-Wing-3.png)
+
+
+![Wing4](git-images/T-Wing-1.png)
+
+
+![Wing5](git-images/T-Wing-3.png)
 
 ## Installation
 
