@@ -34,7 +34,7 @@ module TipAirfoilPolygon()
 $fa = 5; // 360deg/5($fa) = 60 facets this affects performance and object shoothness
 $fs = 1; // Min facet size
 
-slice_ext_width = 0.44;//Your slicers extrusion width setting. Used for some of the interfacing and gap witdh values
+slice_ext_width = 0.6;//Used for some of the interfacing and gap width values
 slice_gap_width = 0.01;//This is the gap in the outer skin.(smaller is better but is limited by what your slicer can recognise)
 
 wing_mode = 2; // 1=trapezoidal wing 2= elliptic wing
@@ -80,8 +80,8 @@ spar_hole = true;                // Add a spar hole into the wing
 spar_hole_perc = 35;             // Percentage from leading edge
 spar_hole_size = 5;              // Size of the spar hole
 spar_hole_length = 200;          // lenth of the spar in mm
-spar_hole_offset = 6;            // Adjust where the spar is located
-spar_hole_void_clearance = 0.88; // Clearance for the spar to grid interface(double extrusion width is usually needed)
+spar_hole_offset = 4;            // Adjust where the spar is located
+spar_hole_void_clearance = 1; // Clearance for the spar to grid interface(at least double extrusion width is usually needed)
 //******//
 
 //****************Servo settings**********//
@@ -223,6 +223,7 @@ else if (add_inner_grid == false && spar_hole == true)
 else
 {
     main();
+
 
     if (servo_show)
     {

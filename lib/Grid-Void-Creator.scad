@@ -116,7 +116,6 @@ module GridESlice(i, scale_factor, LE)
 
 module GridSlice(z_location, i, LE)
 {
-
     current_chord_mm = (wing_mode == 1) ? ChordLengthAtIndex(i, wing_sections)
                                         : ChordLengthAtEllipseIndex((wing_mm + 0.1), wing_root_chord_mm, z_location);
 
@@ -141,18 +140,26 @@ module CreateGridVoid()
     {
         translate([ wing_root_chord_mm * (wing_center_line_perc / 100), 0, 0 ]) union()
         {
-            color("red") hull()
+            color("red") union()
             {
                 for (i = [0:wing_sections])
                 {
-                    GridSlice(wing_section_mm * i, i, true);
+                    hull()
+                    {
+                        GridSlice(wing_section_mm * i, i, true);
+                        GridSlice(wing_section_mm * (i + 1), i + 1, true);
+                    }
                 }
             }
-            color("green") hull()
+            color("green") union()
             {
                 for (i = [0:wing_sections])
                 {
-                    GridSlice(wing_section_mm * i, i, false);
+                    hull()
+                    {
+                        GridSlice(wing_section_mm * i, i, false);
+                        GridSlice(wing_section_mm * (i + 1), i + 1, false);
+                    }
                 }
             }
         }
