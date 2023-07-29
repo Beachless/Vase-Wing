@@ -1,6 +1,3 @@
-center_gap = 0.6;
-rib_width = 0.1;
-spar_hole_offset = 3;
 
 module Grid(x, z, space)
 {
@@ -39,9 +36,9 @@ module StructureGrid(wing_mm, root_chord, size_factor)
     union() Grid(ceil(root_chord / grid_diagonal_distance), ceil(wing_mm / grid_diagonal_distance) + 1,
                  grid_diagonal_distance) rotate([ 0, 45, 0 ]) translate([ 0, -grid_height / 2, 0 ]) difference()
     {
-        cube([ rib_grid_distance + rib_width / 2, grid_height, rib_grid_distance + rib_width / 2 ]);
-        translate([ rib_width / 2, 0, rib_width / 2 ]) color("red")
-            cube([ rib_grid_distance - rib_width / 2, grid_height, rib_grid_distance - rib_width / 2 ]);
+        cube([ rib_grid_distance + slice_gap_width / 2, grid_height, rib_grid_distance + slice_gap_width / 2 ]);
+        translate([ slice_gap_width / 2, 0, slice_gap_width / 2 ]) color("red")
+            cube([ rib_grid_distance - slice_gap_width / 2, grid_height, rib_grid_distance - slice_gap_width / 2 ]);
     }
 }
 
@@ -55,7 +52,7 @@ module StructureGridHoles(wing_mm, root_chord, size_factor)
     GridHoles(ceil(root_chord / grid_diagonal_distance), ceil(wing_mm / grid_diagonal_distance) + 1,
               grid_diagonal_distance) rotate([ 0, 45, 0 ]) translate([ 0, -grid_height / 2, 0 ]) color("red")
         translate([ -grid_height / 2, 0, (grid_height * 0.1) ]) scale([ 0.9, 1, 0.9 ])
-            cube([ root_chord, grid_height, rib_grid_distance + rib_width / 2 ]);
+            cube([ root_chord, grid_height, rib_grid_distance + slice_gap_width / 2 ]);
 }
 
 
@@ -73,12 +70,12 @@ module StructureSparGrid(wing_mm, root_chord, size_factor, spar_num, spar_offset
             for (i = [0:spar_num - 1])
             {
                     translate([ space_bet_spars * i, -root_chord / 3 / 2, 0 ]) color("orange")
-                        cube([ rib_width, root_chord / 3, wing_mm ]);
+                        cube([ slice_gap_width, root_chord / 3, wing_mm ]);
             }
             for (i = [0:rib_num])
             {
                 translate([ 0, -root_chord / 3 / 2, space_bet_ribs * i ]) color("green") rotate([ 0, 55, 0 ])
-                    cube([ root_chord * 2, root_chord / 3, rib_width ]);
+                    cube([ root_chord * 2, root_chord / 3, slice_gap_width ]);
             }
         }
     }

@@ -4,14 +4,6 @@
 // https://www.thingiverse.com/thing:3506692
 // https://github.com/guillaumef/openscad-airfoil
 
-include <lib/Grid-Structure.scad>
-include <lib/Grid-Void-Creator.scad>
-include <lib/Helpers.scad>
-include <lib/Rib-Void-Creator.scad>
-include <lib/Servo-Hole.scad>
-include <lib/Spar-Hole.scad>
-include <lib/Wing-Creator.scad>
-
 // Module for root airfoil polygon
 include <lib/openscad-airfoil/s/s2027.scad>
 
@@ -39,13 +31,16 @@ module TipAirfoilPolygon()
 
 //****************Global Variables*****************//
 
-$fa=10; //360deg/5($fa) = 60 facets this affects performance and object shoothness
-$fs=1; //Min facet size
+$fa = 5; // 360deg/5($fa) = 60 facets this affects performance and object shoothness
+$fs = 1; // Min facet size
+
+slice_ext_width = 0.44;//Your slicers extrusion width setting. Used for some of the interfacing and gap witdh values
+slice_gap_width = 0.01;//This is the gap in the outer skin.(smaller is better but is limited by what your slicer can recognise)
 
 wing_mode = 2; // 1=trapezoidal wing 2= elliptic wing
 
 wing_sections =
-    19; // how many sections you would like to break up the wing into more is higher resolution but higher processing
+    39; // how many sections you would like to break up the wing into more is higher resolution but higher processing
 wing_mm = 300;            // wing length in mm
 wing_root_chord_mm = 150; // Root chord legth in mm
 wing_tip_chord_mm = 50;   // wing tip chord length in mm (Not relevant for elliptic wing)
@@ -90,7 +85,8 @@ spar_hole_void_clearance = 0.88; // Clearance for the spar to grid interface(dou
 //******//
 
 //****************Servo settings**********//
-create_servo_void = true; //It is important to check that your servo placement doesnt create any artifacts(You can comment out the CreateWing() function to assist)
+create_servo_void = true; // It is important to check that your servo placement doesnt create any artifacts(You can
+// comment out the CreateWing() function to assist)
 servo_type = 1;           // 1=3.7g 2=5g 3=9g
 servo_dist_root_mm = 100; // servo placement from root
 servo_dist_le_mm = 64;    // servo placement from the leading edge
@@ -100,6 +96,14 @@ servo_show = false;       // for debugging only. Show the servo for easier place
 //******//
 
 //*******************END***************************//
+
+include <lib/Grid-Structure.scad>
+include <lib/Grid-Void-Creator.scad>
+include <lib/Helpers.scad>
+include <lib/Rib-Void-Creator.scad>
+include <lib/Servo-Hole.scad>
+include <lib/Spar-Hole.scad>
+include <lib/Wing-Creator.scad>
 
 module main()
 {
@@ -150,10 +154,22 @@ module main()
                                     }
                                     if (create_servo_void)
                                     {
-                                        rotate([ 0, 0, servo_rotate_z_deg ]) translate([
-                                            servo_dist_le_mm, servo_dist_depth_mm,
-                                            servo_dist_root_mm
-                                        ]) 3_7gServoVoid();
+                                        rotate([ 0, 0, servo_rotate_z_deg ])
+                                            translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ])
+                                        {
+                                            if (servo_type == 1)
+                                            {
+                                                3_7gServoVoid();
+                                            }
+                                            else if (servo_type == 2)
+                                            {
+                                                5gServoVoid();
+                                            }
+                                            else if (servo_type == 3)
+                                            {
+                                                9gServoVoid();
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -172,7 +188,21 @@ module main()
             if (create_servo_void)
             {
                 rotate([ 0, 0, servo_rotate_z_deg ])
-                    translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ]) 3_7gServo();
+                    translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ])
+                {
+                    if (servo_type == 1)
+                    {
+                        3_7gServo();
+                    }
+                    else if (servo_type == 2)
+                    {
+                        5gServo();
+                    }
+                    else if (servo_type == 3)
+                    {
+                        9gServo();
+                    }
+                }
             }
         }
     }
@@ -192,11 +222,27 @@ else if (add_inner_grid == false && spar_hole == true)
 }
 else
 {
-     main();
+    main();
 
     if (servo_show)
     {
-        rotate([ 0, 0, servo_rotate_z_deg ])
-            translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ]) 3_7gServo();
+        rotate([ 0, 0, servo_rotate_z_deg ]) translate([ servo_dist_le_mm, servo_dist_depth_mm, servo_dist_root_mm ])
+        {
+            if (servo_type == 1)
+            {
+                3_7gServo();
+                //3_7gServoVoid();
+            }
+            else if (servo_type == 2)
+            {
+                5gServo();
+                //5gServoVoid();
+            }
+            else if (servo_type == 3)
+            {
+                9gServo();
+                //9gServoVoid();
+            }
+        }
     }
 }

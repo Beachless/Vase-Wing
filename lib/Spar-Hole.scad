@@ -6,7 +6,7 @@ module CreateSparHole()
     {
         translate([ spar_hole_perc / 100 * wing_root_chord_mm, 0, 0 ]) difference()
         {
-            translate([ 0, spar_hole_size / 2 - 0.05, 0 ]) cube([ 0.1, 50, spar_hole_length + 10 ]);
+            translate([ 0, spar_hole_size / 2 - (slice_gap_width/2), 0 ]) cube([ slice_gap_width, 50, spar_hole_length + 10 ]);
 
             translate([ -5, spar_hole_size / 2, spar_hole_length ]) rotate([ 35, 0, 0 ]) cube([ 10, 50, 20 ]);
         }

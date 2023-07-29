@@ -1,5 +1,5 @@
 CamberAdjust = 0; //% to increase or decrease the camber for difficult airfoils
-CenterGap = 0.6;
+CenterGap = slice_ext_width;
 XandZHeight = 0.0001;
 
 function scalePath(points, scaleFactor) = [for (p = points)[p[0] * scaleFactor, p[1] * scaleFactor]];
