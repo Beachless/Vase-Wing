@@ -95,6 +95,14 @@ servo_dist_depth_mm = 10; // offset the servo into or out of the wing till you d
 servo_show = false;       // for debugging only. Show the servo for easier placement
 //******//
 
+//****************Aileron settings**********//
+create_aileron = true; // Create an Aileron
+aileron_root_width = 30;    //The aileron width from the TE on the root side
+aileron_tip_width = 30;    //The aileron width from the TE on the tip side
+aileron_length = 100;      //How long to make the aileron
+aileron_start = 150;        //How far from the root should the aileron start
+//******//
+
 //*******************END***************************//
 
 include <lib/Grid-Structure.scad>
@@ -104,6 +112,7 @@ include <lib/Rib-Void-Creator.scad>
 include <lib/Servo-Hole.scad>
 include <lib/Spar-Hole.scad>
 include <lib/Wing-Creator.scad>
+include <lib/Aileron-Creator.scad>
 
 module main()
 {
@@ -222,8 +231,8 @@ else if (add_inner_grid == false && spar_hole == true)
 }
 else
 {
-    main();
 
+    main();
 
     if (servo_show)
     {

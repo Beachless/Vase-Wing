@@ -66,7 +66,7 @@ module Slice(index, local_wing_sections)
 module WingSlice(index, z_location, local_wing_sections)
 {
     current_chord_mm = (wing_mode == 1) ? ChordLengthAtIndex(index, local_wing_sections)
-                                        : ChordLengthAtEllipseIndex((wing_mm + 0.1), wing_root_chord_mm, z_location);
+                                        : ChordLengthAtEllipsePosition((wing_mm + 0.1), wing_root_chord_mm, z_location);
     scale_factor = current_chord_mm / 100;
 
     translate([ 0, 0, z_location ]) linear_extrude(height = 0.00000001, slices = 0)

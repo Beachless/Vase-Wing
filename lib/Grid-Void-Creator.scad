@@ -2,7 +2,7 @@ CamberAdjust = 0; //% to increase or decrease the camber for difficult airfoils
 CenterGap = slice_ext_width;
 XandZHeight = 0.0001;
 
-function scalePath(points, scaleFactor) = [for (p = points)[p[0] * scaleFactor, p[1] * scaleFactor]];
+//function scalePath(points, scaleFactor) = [for (p = points)[p[0] * scaleFactor, p[1] * scaleFactor]];
 
 function max_x(points, idx = 0, max_vals = undef,
                max_x_val = -1e10) = (idx == len(points)) ? max_vals
@@ -117,7 +117,7 @@ module GridESlice(i, scale_factor, LE)
 module GridSlice(z_location, i, LE)
 {
     current_chord_mm = (wing_mode == 1) ? ChordLengthAtIndex(i, wing_sections)
-                                        : ChordLengthAtEllipseIndex((wing_mm + 0.1), wing_root_chord_mm, z_location);
+                                        : ChordLengthAtEllipsePosition((wing_mm + 0.1), wing_root_chord_mm, z_location);
 
     scale_factor = current_chord_mm / 100;
     translate([ 0, 0, z_location ]) translate([ -wing_center_line_perc / 100 * current_chord_mm, 0, 0 ])
